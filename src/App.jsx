@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
+import { DownloadJSON } from "./components/DownloadJSON ";
+import { Graphs } from "./components/Graphs";
 import { ProductList } from "./components/ProductList";
 import { SearchBar } from "./components/SearchBar";
 import { StatsPanel } from "./components/StatsPanel";
@@ -16,7 +18,11 @@ function App() {
   const [titleFilter, seTitleFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [orderBy, setOrderBy] = useState("");
+  const [graphCategoryData, setGraphCategoryData] = useState([]);
+  const [graphPriceData, setGraphPriceData] = useState([]);
+  const [graphStockData, setGraphStockData] = useState([]);
   
+
   const divRef = useRef(null);
 
   useEffect(() => {
@@ -38,6 +44,7 @@ function App() {
   useEffect(() => {
     calculateBasicStats();
     calculateAdvanceStats();
+    calculateGraphData();
   }, [searched]);
 
   const calculateBasicStats = () => {
@@ -105,6 +112,46 @@ function App() {
     setAdvanceStats({ avgPrice, avgRating, minPrice, maxPrice, stockOver50, ratingOver4_5, statsByCategories });
   };
 
+  const calculateGraphData = () => {
+    const data = [...(searched || [])];
+
+    const categories = data.reduce((acc, product) => {
+      if (!acc.includes(product.category)) {
+        acc.push(product.category);
+      }
+      return acc;
+    }, []);
+
+    const graphCategories = [];
+
+    for (const category of categories) {
+      const dataCategory = data.filter((p) => p.category == category);
+
+      const count = dataCategory.length;
+
+      graphCategories.push({ category, count });
+    }
+
+    setGraphCategoryData(graphCategories);
+    setGraphPriceData(
+      data.map((P) => {
+        return {
+          name: P.title,
+          price: P.price * Math.random(),
+        };
+      })
+    );
+
+    setGraphStockData(
+      data.map((P) => {
+        return {
+          name: P.title,
+          stock: P.stock,
+        };
+      })
+    );
+  };
+
   const filterData = (title, category, order) => {
     const filteredData =
       datos.products?.filter((prod) => {
@@ -145,6 +192,8 @@ function App() {
       <h2 className="text-2xl font-semibold text-gray-700 text-center mb-4 tracking-wide"> ¡Aquí encontrarás desde comida para gato hasta un nuevo sofá! </h2> {error && <p>Error: {error.message}</p>}
       <SearchBar filterByName={seTitleFilter} filterByCategory={setCategoryFilter} orderBy={setOrderBy} />
       <StatsPanel basicStats={basicStats} advanceStats={advanceStats} />
+      <Graphs graphCategoryData={graphCategoryData} graphPriceData={graphPriceData} graphStockData={graphStockData} />
+      <DownloadJSON data={searched} fileName={"data"}  />
       <ProductList searched={searched} />
     </div>
   );
