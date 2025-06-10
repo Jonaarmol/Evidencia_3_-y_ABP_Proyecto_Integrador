@@ -30,25 +30,26 @@ El objetivo es construir una aplicación web interactiva para visualizar, filtra
 - Recharts
 - Herramientas de exportación (dependiendo del formato elegido)
 
-## Estructura del proyecto
+### Estructura del proyecto
 
-src: Carpeta principal del código fuente
-    components: Componentes reutilizables de la interfaz
-        DownloadJSON.jsx: Componente para exportar datos filtrados en formato JSON
-        Graphs.jsx: Componente para gráficos dinámicos con Recharts
-        ProductItem.jsx: Componente que representa un producto individual
-        ProductList.jsx: Componente que renderiza la lista de productos
-        SearchBar.jsx: Barra de búsqueda de productos por nombre
-        StatsPanel.jsx: Panel de estadísticas descriptivas (máximo, mínimo, promedio)
-    App.jsx: Componente raíz de la aplicación
-    App.css: Estilos generales de la aplicación
-    index.css: Estilos base de la aplicación
-    main.jsx: Punto de entrada de la app (ReactDOM.render)
-index.html: Archivo HTML principal
-vite.config.js: Configuración del proyecto con Vite
-tailwind.config.js: Configuración de Tailwind CSS
-eslint.config.js: Configuración de ESLint para análisis estático del código
-package.json: Dependencias y scripts del proyecto
-package-lock.json: Control de versiones de dependencias
-gitignore: Archivos y carpetas ignoradas por Git
-README.md: Documentación del proyecto
+- `src/`: Carpeta principal del código fuente.
+  - `components/`: Componentes reutilizables de la interfaz.
+    - `DownloadJSON.jsx`: Componente para exportar datos filtrados en formato JSON.
+    - `Graphs.jsx`: Componente para gráficos dinámicos con Recharts.
+    - `ProductItem.jsx`: Componente que representa un producto individual.
+    - `ProductList.jsx`: Componente que renderiza la lista de productos.
+    - `SearchBar.jsx`: Barra de búsqueda de productos por nombre.
+    - `StatsPanel.jsx`: Panel de estadísticas descriptivas (máximo, mínimo, promedio).
+  - `App.jsx`: Componente raíz de la aplicación.
+  - `App.css`: Estilos generales de la aplicación.
+  - `index.css`: Estilos base de la aplicación.
+  - `main.jsx`: Punto de entrada de la app (ReactDOM.render).
+- `index.html`: Archivo HTML principal.
+- `vite.config.js`: Configuración del proyecto con Vite.
+- `tailwind.config.js`: Configuración de Tailwind CSS.
+- `eslint.config.js`: Configuración de ESLint para análisis estático del código.
+- `package.json`: Dependencias y scripts del proyecto.
+- `package-lock.json`: Control de versiones de dependencias.
+- `.gitignore`: Archivos y carpetas ignoradas por Git.
+- `README.md`: Documentación del proyecto.
+
